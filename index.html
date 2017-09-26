@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Songs App</title>
+	<script src ="angular-min.js"></script>
+	<script src ="https://cdnjs.cloudflare.com/ajax/libs/angular-soundmanager2/0.5.6/angular-soundmanager2.min.js"></script>
+	<script src ="angular-route-min.js"></script>
+	<script src ="angular-soundmanager2.min.js"></script>
+	<script src ="s.js"></script>
+</head>
+<body ng-app="songsapp" ng-controller="sctrl" ng-view="" ng-style ="c">
+<div id="serachbox">
+
+<input type="text" ng-model="globalSearch.$" placeholder="search" style="float: right">
+	
+</div>
+
+<div class="title">
+	<p style="color: black">
+		<h1> <center> <b style="color:Orange;"><marquee> Welcome To Online Songs </marquee></b> </center>  </h1>
+	</p>
+</div>
+<div class="menu">
+   			    <center>
+   			    <a href="#" style="padding:1%"><b style="font-size: 150%" style="color: black;"> Home </b></a>
+   			    <a href="#songs" style="padding:1%"> <b style="font-size: 150%"> Songs  </b></a>
+   			    <a href="#aboutus"> <b style="font-size: 150%"> Aboutus </b></a>
+   			    </center>
+   			
+</div>
+<div ng-view="" ng-app="songsapp">
+	
+</div>
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+<style>
+   .seekBase {
+  height: 30px;
+  width: 90%;
+  border: 1px solid #cccccc;
+}
+.seekLoad {
+    height: 30px;
+  width: 0;
+  background-color: #E0EAF1;
+}
+
+li {  
+    cursor: pointer;
+}
+</style>
+<div id="serachbox">
+
+<input type="text" ng-model="globalSearch.$" placeholder="search" style="float: right">
+   
+</div>
+
+<div class="title">
+   <p style="color: black">
+      <h1> <center> <b style="color:orange;"><marquee> Welcome To Online Songs </marquee></b> </center>  </h1>
+   </p>
+</div>
+<div class="menu" style="background-color: orange">
+                <center>
+                <a href="#" style="padding:1%"><b style="font-size: 150%" style="color: black;"> Home </b></a>
+                <a href="#Songs" style="padding:1%"> <b style="font-size: 150%"> Songs  </b></a>
+                <a href="#aboutus"> <b style="font-size: 150%"> Aboutus </b></a>
+                </center>
+            
+</div>
+<div class="container" ng-controller="sctrl">  
+    <div class="row">
+        <div class="col-md-12">
+
+           <center><h1 style="color: red;">Songs</h1> </center>
+            <ul>
+                <li ng-repeat="song in songs | filter: globalSearch">
+                    <button music-player data-type="playTrack" data-song="{{ $index }}" all-songs="songs"
+                            my-playlist="playlist" style="display:block; margin:0 auto; padding:5px; font-size:15px; width:300px; border-width: 5px; ">
+                            {{ song.title }}
+                    </button>
+                    <button music-player data-type="addToPlaylist" data-song="{{ $index }}" all-songs="songs"
+                            my-playlist="playlist" style="display:block; margin:0 auto; padding:5px; font-size:15px; width:30px; border-width: 5px; ">+
+                    </button>
+                </li>
+            </ul>
+
+           <center><button play-all="songs" my-playlist="playlist" style="border: 5px; width: 10%; color: red;">Play all</button> </center>
+
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- init soundManager2 player -->
+            <sound-manager></sound-manager>
+
+            <p style="color: White;">
+                Currently Playing: {{ currentPlaying.title }} ({{ currentPostion }} / {{ currentDuration }})
+            </p>
+
+            <div class="seekBase" seek-track style="background-color:black;">
+                <div class="seekLoad" ng-style="{width : ( progress + '%' ) }" style="background-color:red;"></div>
+            </div>
+            <br />
+            <button play-music>Play</button>
+            -
+            <button pause-music>Pause</button>
+            -
+            <button stop-music>Stop</button>
+            -
+            <button repeat-music>Repeat ({{ repeat }})</button>
+            <br/>
+            <br/>
+            <p style="color:red;">Volume: {{ volume }} </p>
+            -
+            <button music-volume data-type="increase">+</button>
+            -
+            <button music-volume data-type="decrease">-</button>
+            -
+            <button mute-music>Mute ({{ mute }})</button>
+            <br/>
+            <br/>
+            <button prev-track>Prev Track</button>
+            -
+            <button next-track>Next Track</button>
+            -
+            <button clear-playlist>Clear Playlist</button>
+            <br/>
+            <br/>
+            <table>
+            <thead><h2 style="color: red;">Playlist</h2></thead>
+            <ul set-playlist style="color:red; font-style: italic;">
+                <li ng-repeat="song in playlist">
+                    <a play-from-playlist data-song="{{song.id}}">{{ song.title }}</a>
+                    -
+                    <a remove-from-playlist data-song="{{song.id}}" data-index="{{$index}}" my-playlist="playlist">
+                        <small>(remove)</small>
+                    </a>
+                    -
+                    <span ng-if="currentPlaying.id == song.id">(current)</span>
+                </li>
+            </ul>
+            </table>
+        </div>
+    </div>
+</div>  
