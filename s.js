@@ -1,3 +1,7 @@
+/*
+    @Author Salman Zafar
+    @ Date  8-8-2016  @
+*/
 var app = angular.module('songsapp',['ngRoute','angularSoundManager']);
 app.config(function($routeProvider)
 	{
